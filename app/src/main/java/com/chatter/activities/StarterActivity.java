@@ -128,123 +128,129 @@ public class StarterActivity extends AppCompatActivity {
         startActivity(shareIntent);
     }
     private void goToConversationsList(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        if(!User.listenerExists)
+        {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        //listener pentru contacte
-        DatabaseReference userContactsRef = database.getReference("users").child(FirebaseAuth.getInstance().getUid()).child("contacts");
-        userContactsRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Contact newContact = snapshot.getValue(Contact.class);
-                assert newContact != null;
-                newContact.setKey(snapshot.getKey());
-                User.addContact(newContact);
-            }
+            //listener pentru contacte
+            DatabaseReference userContactsRef = database.getReference("users").child(FirebaseAuth.getInstance().getUid()).child("contacts");
+            userContactsRef.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    Contact newContact = snapshot.getValue(Contact.class);
+                    assert newContact != null;
+                    newContact.setKey(snapshot.getKey());
+                    User.addContact(newContact);
+                }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
+                }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                User.removeContact(snapshot.getKey());
-            }
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                    User.removeContact(snapshot.getKey());
+                }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-        //TODO: EVITA ADAUGAREA DE 2 ORI
-        //listener pentru conversatii
-        DatabaseReference userConvRef = database.getReference()
-                .child("users")
-                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                .child("user_conversations")
-                .getRef();
-        //listener pentru conversatii cu tot cu mesaje
-        userConvRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot userConversationSnapshot, @Nullable String previousChildName) {
-                //pentru fiecare conversatie care apare se preia cheia
-                String key = userConversationSnapshot.getKey();
-                //referinta catre conversatie din root-ul "conversations"
-                assert key != null;
-                DatabaseReference conversationsRef = database.getReference().child("conversations").child(key).getRef();
+                }
+            });
 
-                //pentru fiecare conversatie aparuta, preia datele
-                conversationsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot conversationSnapshot) {
-                        Conversation c = conversationSnapshot.getValue(Conversation.class);
-                        assert c != null;
-                        c.setKey(conversationSnapshot.getKey());
-                        User.addConversation(c);
+            //listener pentru conversatii
+            DatabaseReference userConvRef = database.getReference()
+                    .child("users")
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                    .child("user_conversations")
+                    .getRef();
+            //listener pentru conversatii cu tot cu mesaje
+            userConvRef.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot userConversationSnapshot, @Nullable String previousChildName) {
+                    //pentru fiecare conversatie care apare se preia cheia
+                    String key = userConversationSnapshot.getKey();
+                    //referinta catre conversatie din root-ul "conversations"
+                    assert key != null;
+                    DatabaseReference conversationsRef = database.getReference().child("conversations").child(key).getRef();
 
-                        //de adaugat listener pentru mesaje
-                        DatabaseReference messagesRef = database.getReference().child("messages").child(conversationSnapshot.getKey()).getRef();
-                        messagesRef.addChildEventListener(new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                                Message newMessage = snapshot.getValue(Message.class);
-                                newMessage.setKey(snapshot.getKey());
-                                c.addMessage(newMessage);
-                            }
+                    //pentru fiecare conversatie aparuta, preia datele
+                    conversationsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot conversationSnapshot) {
+                            Conversation c = conversationSnapshot.getValue(Conversation.class);
+                            assert c != null;
+                            c.setKey(conversationSnapshot.getKey());
+                            User.addConversation(c);
 
-                            @Override
-                            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            //de adaugat listener pentru mesaje
+                            DatabaseReference messagesRef = database.getReference().child("messages").child(conversationSnapshot.getKey()).getRef();
+                            messagesRef.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                                    Message newMessage = snapshot.getValue(Message.class);
+                                    newMessage.setKey(snapshot.getKey());
+                                    c.addMessage(newMessage);
+                                }
 
-                            }
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                            @Override
-                            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                                }
 
-                            }
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-                            @Override
-                            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                                }
 
-                            }
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                                }
 
-                            }
-                        });
-                    }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+                        }
 
-                    }
-                });
-            }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        }
+                    });
+                }
 
-            }
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot userConversationSnapshot) {
-            }
+                }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot userConversationSnapshot) {
+                }
 
-            }
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            User.listenerExists = true;
+        }
+
         Intent conversationsIntent = new Intent(this, ConversationsListActivity.class);
         startActivity(conversationsIntent);
     }

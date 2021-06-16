@@ -13,6 +13,8 @@ import java.util.Optional;
 
 public class User {
     @Exclude
+    public static boolean listenerExists = false;
+    @Exclude
     private static final MutableLiveData<ArrayList<Contact>> contacts = new MutableLiveData<>(new ArrayList<>());
     @Exclude
     private static final MutableLiveData<ArrayList<Conversation>> conversations = new MutableLiveData<>(new ArrayList<>());
