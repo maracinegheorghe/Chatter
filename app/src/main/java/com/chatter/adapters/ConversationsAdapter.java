@@ -47,6 +47,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
         viewHolder.getTextViewLastMessageSender().setText(conversation.getLastMessage().getSenderEmail());
         viewHolder.getTextViewLastMessageContent().setText(conversation.getLastMessage().getTextContent());
+        viewHolder.getTextViewLastMessageTimestamp().setText(conversation.getLastMessage().getTimestamp().toString());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
