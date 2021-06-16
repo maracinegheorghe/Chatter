@@ -37,7 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ContactListActivity extends AppCompatActivity implements  InsertConversationTitleDialog.finishTitleInsertionDialogListener{
+public class ContactListActivity extends AppCompatActivity implements InsertConversationTitleDialog.finishTitleInsertionDialogListener {
     RecyclerView recyclerView;
     ContactsAdapter contactsAdapter;
     ContactsViewModel contactsViewModel;
@@ -67,7 +67,7 @@ public class ContactListActivity extends AppCompatActivity implements  InsertCon
 
         //adauga observer pentru lista de conversatii
         contactsViewModel = ViewModelProviders.of(this).get(ContactsViewModel.class);
-        contactsViewModel.getContactsLiveData().observe(this,contactsListUpdateObserver);
+        contactsViewModel.getContactsLiveData().observe(this, contactsListUpdateObserver);
     }
 
     Observer<ArrayList<Contact>> contactsListUpdateObserver = new Observer<ArrayList<Contact>>() {
@@ -77,32 +77,38 @@ public class ContactListActivity extends AppCompatActivity implements  InsertCon
         }
     };
 
-    public void startNewConversation(){
+    public void startNewConversation() {
         String newConversationName = "";
         ArrayList<Contact> selectedContacts = ContactsAdapter.selectedContacts;
 
         if (selectedContacts.size() == 1) {
-            Conversation newConversation = User.getConversations().getValue().stream().filter(c -> c.getParticipantsList().contains(selectedContacts.get(0))).findFirst().orElse(null);
-
-            //daca nu exista conversatie existenta
-            if (newConversation == null) {
-                newConversationName = "private";
-                createConversation(newConversationName);
-            } else {
-                //daca exista du-l la ea
-                Intent data = new Intent();
-                data.putExtra("conversation_key", newConversation.getKey());
-                this.setResult(1, data);
-                this.finish();
+            for (Conversation existingConversation :
+                    User.getConversations().getValue()) {
+                if (existingConversation.getParticipantsList().size() <= 2) {
+                    for (Contact participant :
+                            existingConversation.getParticipantsList()) {
+                        if (participant.getKey().equals(selectedContacts.get(0).getKey())) {
+                            Intent data = new Intent();
+                            data.putExtra("conversation_key", existingConversation.getKey());
+                            this.setResult(1, data);
+                            this.finish();
+                            ContactsAdapter.resetSelectedContacts();
+                            return;
+                        }
+                    }
+                }
             }
+            newConversationName = "private";
+            createConversation(newConversationName);
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
             InsertConversationTitleDialog insertConversationTitleDialog = InsertConversationTitleDialog.newInstance();
             insertConversationTitleDialog.show(fragmentManager, "conversation_title");
         }
+        ContactsAdapter.resetSelectedContacts();
     }
 
-    public void createConversation(String newConversationName){
+    public void createConversation(String newConversationName) {
         ArrayList<Contact> selectedContacts = ContactsAdapter.selectedContacts;
         //regasire lista de contacte cu chei
         ArrayList<Contact> conversationContacts = new ArrayList<>();
@@ -144,6 +150,7 @@ public class ContactListActivity extends AppCompatActivity implements  InsertCon
             this.finish();
         });
     }
+
     @Override
     public void onFinishTitleInsertionDialog(String newConversationTitle) {
         createConversation(newConversationTitle);
@@ -156,6 +163,7 @@ public class ContactListActivity extends AppCompatActivity implements  InsertCon
         this.setResult(0, data);
         this.finish();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -166,7 +174,7 @@ public class ContactListActivity extends AppCompatActivity implements  InsertCon
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                adapterContacts = (ArrayList<Contact>)User.getContacts().getValue().stream().filter(c -> c.getEmail().contains(query)).collect(Collectors.toList());
+                adapterContacts = (ArrayList<Contact>) User.getContacts().getValue().stream().filter(c -> c.getEmail().contains(query)).collect(Collectors.toList());
                 contactsAdapter.setContacts(adapterContacts);
                 contactsAdapter.notifyDataSetChanged();
                 return true;
@@ -174,7 +182,7 @@ public class ContactListActivity extends AppCompatActivity implements  InsertCon
 
             @Override
             public boolean onQueryTextChange(String query) {
-                adapterContacts = (ArrayList<Contact>)User.getContacts().getValue().stream().filter(c -> c.getEmail().contains(query)).collect(Collectors.toList());
+                adapterContacts = (ArrayList<Contact>) User.getContacts().getValue().stream().filter(c -> c.getEmail().contains(query)).collect(Collectors.toList());
                 contactsAdapter.setContacts(adapterContacts);
                 contactsAdapter.notifyDataSetChanged();
                 return true;

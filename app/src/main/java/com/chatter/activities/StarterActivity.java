@@ -223,6 +223,37 @@ public class StarterActivity extends AppCompatActivity {
 
                         }
                     });
+
+                    conversationsRef.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                            Message lastMessage = snapshot.getValue(Message.class);
+                            assert lastMessage != null;
+                            lastMessage.setKey(snapshot.getKey());
+                            User.getConversation(key).setLastMessage(lastMessage);
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
 
                 @Override

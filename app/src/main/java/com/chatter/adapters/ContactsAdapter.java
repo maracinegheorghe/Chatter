@@ -21,12 +21,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     public static ArrayList<Contact> selectedContacts = new ArrayList<>();
     public ArrayList<Contact> contacts;
+
     public ContactsAdapter(ArrayList<Contact> contacts) {
         this.contacts = contacts;
     }
 
     public void setContacts(ArrayList<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    public static void resetSelectedContacts(){
+        for (Contact c:
+             selectedContacts) {
+            c.select();
+        }
+        selectedContacts=new ArrayList<>();
     }
 
     @NonNull
@@ -80,5 +89,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
             return textViewContactEmail;
         }
     }
-    
+
+
 }

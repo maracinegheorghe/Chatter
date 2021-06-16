@@ -225,18 +225,24 @@ public class MessagesFragment extends Fragment {
         String messageContent = inputEditTextMessage.getText().toString();
 
         Message newMessage = new Message(messageContent);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference convRef = database.getReference().child("messages").child(conversation.getKey()).push();
-        convRef.setValue(newMessage);
+        sendMessageToFirebase(newMessage);
         inputEditTextMessage.setText("");
     }
+    private void sendMessageToFirebase( Message newMessage) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference messagesRef = database.getReference().child("messages").child(conversation.getKey()).push();
+        messagesRef.setValue(newMessage);
 
+        DatabaseReference lastMessageRef = database.getReference()
+                .child("conversations").child(conversation.getKey())
+                .child("lastMessage");
+        lastMessageRef.setValue(newMessage);
+    }
     private void sendLocationMessage(LatLng coordonates) {
         Message newMessage = new Message(new Location(coordonates));
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference convRef = database.getReference().child("messages").child(conversation.getKey()).push();
-        convRef.setValue(newMessage);
+        sendMessageToFirebase(newMessage);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         FloatingActionButton buttonSendMessage = view.findViewById(R.id.buttonSendMessage);
