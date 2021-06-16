@@ -142,6 +142,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         img[0] = mediaMetadataRetriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST);
                     }
                     viewHolder.setImage(img[0]);
+                    if(media.mediaType.contains("image")){
+                        //daca exista local
+                        img[0] = BitmapFactory.decodeFile(media.localPath);
+
+                    } else {
+                        MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
+                        mediaMetadataRetriever.setDataSource(media.localPath);
+                        img[0] = mediaMetadataRetriever.getFrameAtTime(0, MediaMetadataRetriever.OPTION_CLOSEST);
+                    }
+                    viewHolder.setImage(img[0]);
 
                 } else {
                     getMediaFromFirebase(messages.get(position).getMediaKey(), viewHolder);

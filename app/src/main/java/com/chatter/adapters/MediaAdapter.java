@@ -11,13 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.chatter.DAO.ChatterDatabase;
 import com.chatter.DAO.MediaDAO;
 import com.chatter.R;
+import com.chatter.activities.ConversationActivity;
 import com.chatter.classes.Media;
+import com.chatter.dialogs.ViewMediaDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -80,6 +83,14 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaHolder>
                 MediaDAO mediaDAO = db.mediaDAO();
                 Media media = mediaDAO.getByLink(mediaLinks.get(position));
                 if (media != null) {
+                    viewHolder.getImageViewMediaList().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FragmentManager fragmentManager = ((ConversationActivity)v.getContext()).getSupportFragmentManager();
+                            ViewMediaDialog viewMediaDialog = ViewMediaDialog.newInstance(media);
+                            viewMediaDialog.show(fragmentManager, "viewMediaDialog");
+                        }
+                    });
                     if(media.mediaType.contains("image")){
                         //daca exista local
                         img[0] = BitmapFactory.decodeFile(media.localPath);
