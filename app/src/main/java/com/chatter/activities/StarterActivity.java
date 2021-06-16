@@ -161,7 +161,7 @@ public class StarterActivity extends AppCompatActivity {
 
             }
         });
-
+        //TODO: EVITA ADAUGAREA DE 2 ORI
         //listener pentru conversatii
         DatabaseReference userConvRef = database.getReference()
                 .child("users")
