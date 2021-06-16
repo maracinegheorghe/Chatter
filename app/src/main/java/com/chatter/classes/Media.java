@@ -1,14 +1,9 @@
 package com.chatter.classes;
 
-import android.graphics.Bitmap;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.io.ByteArrayOutputStream;
-import java.sql.Blob;
 
 @Entity
 public class Media {

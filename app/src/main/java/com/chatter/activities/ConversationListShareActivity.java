@@ -1,16 +1,11 @@
 package com.chatter.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -20,20 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chatter.R;
 import com.chatter.adapters.ConversationsShareAdapter;
 import com.chatter.classes.Conversation;
-import com.chatter.classes.Message;
-import com.chatter.classes.User;
 import com.chatter.viewModels.ConversationsViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 //todo: rezolvat cu redimensionarea imaginii din share
 public class ConversationListShareActivity extends AppCompatActivity {
@@ -97,7 +81,7 @@ public class ConversationListShareActivity extends AppCompatActivity {
             {
                 this.imagesToShare.add(MediaStore.Images.Media.getBitmap(this.getContentResolver() , Uri.parse(imageUri.toString())));
             }
-            catch (Exception e)
+            catch (Exception ignored)
             {
             }
         }
@@ -111,7 +95,7 @@ public class ConversationListShareActivity extends AppCompatActivity {
                 try {
                     this.imagesToShare.add(MediaStore.Images.Media.getBitmap(this.getContentResolver() , Uri.parse(imageUri.toString())));
                 }
-                catch (Exception e)
+                catch (Exception ignored)
                 {
                 }
             }

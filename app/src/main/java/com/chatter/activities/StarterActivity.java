@@ -13,9 +13,6 @@ import com.chatter.classes.Contact;
 import com.chatter.classes.Conversation;
 import com.chatter.classes.Message;
 import com.chatter.classes.User;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -56,7 +53,7 @@ public class StarterActivity extends AppCompatActivity {
                 goToShareConversationsList();
             }
         }
-        //finish();//termin activitatea altfel la share nu o sa intre in on create
+        finish();
     }
     private void goToShareConversationsList(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();

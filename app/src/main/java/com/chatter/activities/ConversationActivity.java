@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,22 +15,15 @@ import androidx.fragment.app.FragmentManager;
 
 import com.chatter.R;
 import com.chatter.classes.Conversation;
-import com.chatter.classes.Message;
 import com.chatter.classes.User;
 import com.chatter.dialogs.LeaveConversationDialog;
-import com.chatter.dialogs.RegisterDialog;
 import com.chatter.fragments.ConversationMediaFragment;
 import com.chatter.fragments.ConversationParticipantsFragment;
 import com.chatter.fragments.MessagesFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 //todo: iconita pentru drawer
 public class ConversationActivity

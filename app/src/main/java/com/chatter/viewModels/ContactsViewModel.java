@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.chatter.classes.Contact;
-import com.chatter.classes.User;
 
 import java.util.ArrayList;
 

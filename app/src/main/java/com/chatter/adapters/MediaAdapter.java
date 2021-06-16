@@ -1,11 +1,9 @@
 package com.chatter.adapters;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +27,10 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
-import io.reactivex.Flowable;
-import io.reactivex.Single;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaHolder> {
 
-    public ArrayList<String> mediaLinks = new ArrayList<>();
+    public ArrayList<String> mediaLinks;
     public MediaAdapter(ArrayList<String> mediaLinks) {
         this.mediaLinks = mediaLinks;
     }
@@ -80,7 +70,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaHolder>
     }
 
     @Override
-    public void onBindViewHolder(MediaHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull MediaHolder viewHolder, int position) {
         final Bitmap[] img = new Bitmap[1];
         Thread getImageThread = new Thread(new Runnable() {
             @Override

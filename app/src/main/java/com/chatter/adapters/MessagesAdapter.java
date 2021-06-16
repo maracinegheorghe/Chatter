@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
-import android.net.Uri;
-import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,6 @@ import com.chatter.viewHolders.MessageWithLocationViewHolder;
 import com.chatter.viewHolders.MessageWithMediaViewHolder;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
@@ -38,14 +35,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -226,7 +220,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mapView.getMapAsync(new OnMapReadyCallback() {
 
             @Override
-            public void onMapReady(GoogleMap googleMap) {
+            public void onMapReady(@NonNull GoogleMap googleMap) {
                 LatLng coordinates = new LatLng(message.getLocation().getLatitude(), message.getLocation().getLatitude());
                 googleMap.addMarker(new MarkerOptions().position(coordinates));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));

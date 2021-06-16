@@ -15,13 +15,10 @@ import android.view.ViewGroup;
 
 import com.chatter.R;
 import com.chatter.adapters.ContactsAdapter;
-import com.chatter.adapters.MessagesAdapter;
 import com.chatter.classes.Contact;
 import com.chatter.classes.Conversation;
-import com.chatter.classes.Message;
 import com.chatter.classes.User;
 import com.chatter.viewModels.ContactsViewModel;
-import com.chatter.viewModels.MessagesViewModel;
 
 import java.util.ArrayList;
 

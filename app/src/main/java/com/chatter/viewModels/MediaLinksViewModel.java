@@ -3,8 +3,6 @@ package com.chatter.viewModels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.chatter.classes.Contact;
-
 import java.util.ArrayList;
 
 public class MediaLinksViewModel extends ViewModel {

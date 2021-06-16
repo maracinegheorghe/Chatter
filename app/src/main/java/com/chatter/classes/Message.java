@@ -1,9 +1,5 @@
 package com.chatter.classes;
 
-import android.net.Uri;
-import android.widget.ImageView;
-
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.Exclude;
 
 import java.util.Date;

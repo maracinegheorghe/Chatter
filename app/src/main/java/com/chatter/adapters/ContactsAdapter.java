@@ -1,7 +1,5 @@
 package com.chatter.adapters;
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +14,13 @@ import com.chatter.R;
 import com.chatter.activities.ContactListActivity;
 import com.chatter.activities.ConversationActivity;
 import com.chatter.classes.Contact;
-import com.chatter.classes.User;
 
 import java.util.ArrayList;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactHolder> {
 
     public static ArrayList<Contact> selectedContacts = new ArrayList<>();
-    public ArrayList<Contact> contacts = new ArrayList<>();
+    public ArrayList<Contact> contacts;
     public ContactsAdapter(ArrayList<Contact> contacts) {
         this.contacts = contacts;
     }
