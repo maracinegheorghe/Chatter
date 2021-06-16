@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/nav_item_messages"
+            android:icon="@drawable/fui_ic_mail_white_24dp"
+            android:title="Mesaje" />
+        <item
+            android:id="@+id/nav_item_participants"
+            android:icon="@drawable/fui_ic_anonymous_white_24dp"
+            android:title="Participanti" />
+        <item
+            android:id="@+id/nav_item_media"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Media" />
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/nav_item_settings"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Setari" />
+        <item
+            android:id="@+id/nav_item_leave_conversation"
+            android:icon="@android:drawable/ic_menu_revert"
+            android:title="Paraseste conversatia" />
+    </group>
+</menu>

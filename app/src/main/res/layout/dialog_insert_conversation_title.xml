@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonSetNewConversationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/add_button"
+        android:textColor="#5DBCD2"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewConversationTitle" />
+
+    <EditText
+        android:id="@+id/editTextNewConversationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="103dp"
+        android:layout_marginEnd="98dp"
+        android:autofillHints="name@ss"
+        android:ems="10"
+        android:hint="@string/hint_conversation_name"
+        android:inputType="textPersonName|textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCancelNewConversationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:text="@string/cancel_conversation_title"
+        android:textColor="#0A23BD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toEndOf="@+id/buttonSetNewConversationTitle"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewConversationTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

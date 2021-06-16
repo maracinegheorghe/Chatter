@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Chatter</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Parola</string>
+    <string name="login_login">Autentificare</string>
+    <string name="login_register">Inregistrare</string>
+    <string name="title_activity_conversations_list">ConversationsListActivity</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="title_activity_contact_list">ScrollingActivity</string>
+    <string name="cancel_add_contact">RENUNTA</string>
+    <string name="email_hint">email</string>
+    <string name="add_button">Adaugare</string>
+    <string name="title_activity_conversation">ConversationActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hint_conversation_name">Introduceti titlul…</string>
+    <string name="cancel_conversation_title">Anulare</string>
+    <string name="login_password_confirm">Confirmati parola</string>
+    <string name="login_cancel">Anulare</string>
+    <string name="action_search">Cautare</string>
+    <string name="add_contact_menu_option">Adaugare contact</string>
+    <string name="title_activity_conversation_list_share">ConversationListShareActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="title_activity_send_maps">Map</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="leave_conversation_confirm">Paraseste conversatia</string>
+    <string name="cancel_leave_conversation">Anulare</string>
+</resources>

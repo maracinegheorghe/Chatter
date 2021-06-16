@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemSendPhoto"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="Send Photo"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemSendLocation"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="Send Location"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/itemSendVideo"
+        android:icon="@android:drawable/presence_video_busy"
+        android:title="Send Video"
+        app:showAsAction="always" />
+
+</menu>
