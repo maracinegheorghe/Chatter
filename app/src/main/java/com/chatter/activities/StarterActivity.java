@@ -53,7 +53,7 @@ public class StarterActivity extends AppCompatActivity {
                 goToShareConversationsList();
             }
         }
-        finish();
+        //finish();
     }
     private void goToShareConversationsList(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -288,8 +288,8 @@ public class StarterActivity extends AppCompatActivity {
 
         if (requestCode == 1001) {
             if(resultCode == RC_USER_LOGGED_IN){
-                Intent conversationListIntent = new Intent(this, LoginActivity.class);
-                startActivityForResult(conversationListIntent,RC_REQUEST_USER_LOGIN);
+                Intent conversationListIntent = new Intent(this, ConversationsListActivity.class);
+                startActivity(conversationListIntent);
             } else {
                 //retrimitere la login
                 Intent logInIntent = new Intent(this, LoginActivity.class);
